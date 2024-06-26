@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: rgba(128, 128, 128, 0.501);
+            text-align: center;
+            /* border: 2px dotted black; */
+            height: 50vh;
+            box-sizing: border-box;
+        }
+        .firstDiv{
+            text-align: center;
+            /* border: 2px solid black; */
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 500px;
+            margin: auto;
+            /* margin-top: 70px; */
+            margin-top: 10%;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+            background-color: rgba(255, 255, 255, 0.495);
+            border-radius: 25px;
+        }
+        h2{
+            border: 3px solid rgba(151, 172, 44, 0.656);
+            height: 100px;
+            width: 250px;
+            border-radius: 10px 10px 10px 10px;
+            background-color: rgba(255, 255, 0, 0.147);
+            text-align: center;
+            margin: auto;
+            padding-top: 30px; 
+            box-sizing: border-box;
+            font-size: 30px;
+            color: olive;
+        }
+        h1{
+            text-decoration: underline;
+            color: rgb(209, 27, 173);
+            font-size: 40px;
+        }
+        button{
+            border: 1px solid greenyellow;
+            background-color: aquamarine;
+            font-size: 20px;
+            padding: 20px;
+            margin-right: 10px;
+            margin-left: 10px;
+            font-weight: 600;
+            border-radius: 30px;
+        }
+   
+    </style>
+</head>
+<body>
+    <div class="firstDiv">
+       <h1>STOP WATCH</h1><br>
+       <div class="parentDiv">
+     
+          <h2 id="timerh2"><span class="hourNo"> 00 </span>  : <span class="minuteNo"> 00 </span> : <span class="secNo"> 00 </span> </h2>
+          <br><br>
+          <button style="background-color: green;" id="startBtn">Start</button>      
+          <button style="background-color: red;" id="stopBtn">Pause</button> 
+          <button style="background-color: orange;" id="resetBtn">Reset</button> 
+       </div>
+       <br><br>
+    </div>
+</body>
+<script>
+    var timerh2 = document.getElementById("timerh2") ;
+    var startBtn = document.getElementById("startBtn") ;
+    var stopBtn = document.getElementById("stopBtn") ;
+    var resetBtn = document.getElementById("resetBtn") ;
+    var hourNo = document.querySelector(".hourNo") ;
+    var minuteNo = document.querySelector(".minuteNo") ;
+    var secNo = document.querySelector(".secNo") ;
+    
+    startBtn.addEventListener("click",startFunc) ;
+    stopBtn.addEventListener("click",pauseFunc) ;
+    resetBtn.addEventListener("click",resetFunc) ;
+    
+    var secIncrease = 0 ;
+    var minIncrease = 0 ;
+    var hourIncrease = 0 ;
+ 
+    function startFunc(){
+        console.log("start") ;
+        
+        a1 = setInterval(function(){
+            updateTimerSecond() ;
+        },1000) ;
+
+        function updateTimerSecond(){
+             secNo.innerHTML=""
+
+             if(secIncrease==60){
+                minIncrease+= 1 ;
+                secIncrease = 0 ;
+                updateTimerMinute() ;
+             }
+             secNo.innerHTML = ++secIncrease ;
+        } 
+        function updateTimerMinute(){
+            minuteNo.innerHTML = "" ;
+            if(minIncrease==60){
+                hourIncrease+=1 ;
+                minIncrease = 0 ;
+                updateTimerHour() ;
+            }
+            minuteNo.innerHTML = minIncrease ;
+        }
+        function updateTimerHour(){
+            hourNo.innerHTML = "" ;
+            hourNo.innerHTML = hourIncrease ;
+        }
+    }
+    function pauseFunc(){
+        console.log("pause") ;
+        clearInterval(a1) ;
+        
+    }
+    function resetFunc(){
+        console.log("reset") ;
+        clearInterval(a1) ;
+        secIncrease = 0 ;
+        minIncrease = 0 ;
+        hourIncrease = 0 ;
+        secNo.innerHTML = "00" ;
+        minuteNo.innerHTML = "00" ;
+        hourNo.innerHTML = "00" ;
+    }
+    
+
+
+</script>
+</html>
